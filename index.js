@@ -1,5 +1,8 @@
 const inquirer = require('inquirer');
 
+let engineerArr = [];
+let internArr = [];
+
 const managerPrompt = () => {
     return inquirer.prompt([
         {
@@ -22,10 +25,12 @@ const managerPrompt = () => {
             name: 'officeNumber',
             message: `What is the office number of this manager?`,
         },
-    ])
+    ]).then(addAnotherEmployee);
 };
 
-const engineerPrompt = () => {
+const engineerPrompt = (engineerArr) => {
+    //Creates an array for engineers
+
     return inquirer.prompt([
         {
             type: 'input',
@@ -47,10 +52,15 @@ const engineerPrompt = () => {
             name: 'github',
             message: `What is this engineer's gitHub user name?`,
         },
-    ])
+    ]).then(data => {
+        engineerArr.push(data);
+        addAnotherEmployee();
+    });
 };
 
-const internPrompt = () => {
+const internPrompt = (internArr) => {
+    //Creates an array for interns
+
     return inquirer.prompt([
         {
             type: 'input',
@@ -72,7 +82,10 @@ const internPrompt = () => {
             name: 'school',
             message: `What school did this intern graduate from / is attending?`
         },
-    ])
+    ]). then(data => {
+        internArr.push(data);
+        addAnotherEmployee();
+    });
 };
 
 const addAnotherEmployee = () => {
@@ -83,5 +96,17 @@ const addAnotherEmployee = () => {
             message: `Would you like to add another employee? Or does this complete your roster?`,
             choices: ['Engineer', 'Intern', 'None'],
         },
-    ])
+    ]).then(data => {
+        console.log(data);
+        if (data.addAnotherEmployee === 'Engineer') {
+            return engineerPrompt(engineerArr);
+        }
+        else if (data.addAnotherEmployee === 'Intern') {
+            return internPrompt(internArr);
+        } else {
+            return;
+        }
+    })
 };
+
+managerPrompt();

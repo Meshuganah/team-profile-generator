@@ -59,7 +59,7 @@ const generateIntern = internArr => {
     `;
 };
 
-module.exports = templateData => {
+module.exports = (managerArr, engineerArr, internArr) => {
 
     return `
     <!DOCTYPE html>

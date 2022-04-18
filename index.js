@@ -1,9 +1,13 @@
 const inquirer = require('inquirer');
 
+const generatePage = require('./src/page-template');
+const { writeFile } = require(`./src/generate-site`);
+
+let managerArr = [];
 let engineerArr = [];
 let internArr = [];
 
-const managerPrompt = () => {
+const managerPrompt = (managerArr) => {
     return inquirer.prompt([
         {
             type: 'input',
@@ -25,7 +29,10 @@ const managerPrompt = () => {
             name: 'officeNumber',
             message: `What is the office number of this manager?`,
         },
-    ]).then(addAnotherEmployee);
+    ]).then(data => {
+        managerArr.push(data);
+        addAnotherEmployee();
+    });
 };
 
 const engineerPrompt = (engineerArr) => {
@@ -109,4 +116,13 @@ const addAnotherEmployee = () => {
     })
 };
 
-managerPrompt();
+managerPrompt()
+.then(managerArr, engineerArr, internArr => {
+    return generatePage(managerArr, engineerArr, internArr)
+})
+.then(pageHTML => {
+    return writeFile(pageHTML);
+})
+.thencatch(err => {
+    console.log(err);
+});

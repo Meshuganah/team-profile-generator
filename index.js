@@ -111,18 +111,19 @@ const addAnotherEmployee = () => {
         else if (data.addAnotherEmployee === 'Intern') {
             return internPrompt(internArr);
         } else {
-            return;
+            generatePage(managerArr, engineerArr, internArr);
+            writeFile(pageHTML);
         }
     })
 };
 
-managerPrompt()
-.then(managerArr, engineerArr, internArr => {
-    return generatePage(managerArr, engineerArr, internArr)
-})
-.then(pageHTML => {
-    return writeFile(pageHTML);
-})
-.thencatch(err => {
-    console.log(err);
-});
+managerPrompt(managerArr)
+//  .then(managerArr, engineerArr, internArr => {
+//      return generatePage(managerArr, engineerArr, internArr)
+//  })
+//  .then(pageHTML => {
+//      return writeFile(pageHTML);
+//  })
+//  .thencatch(err => {
+//      console.log(err);
+//  });

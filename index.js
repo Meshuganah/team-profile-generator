@@ -3,11 +3,13 @@ const inquirer = require('inquirer');
 const generatePage = require('./src/page-template');
 const { writeFile } = require(`./src/generate-site`);
 
-let managerArr = [];
-let engineerArr = [];
-let internArr = [];
+const Manager = require('./lib/Manager');
+const Engineer = require('./lib/Engineer');
+const Intern = require('./lib/Intern');
 
-const managerPrompt = (managerArr) => {
+const employees = [];
+
+const managerPrompt = () => {
     return inquirer.prompt([
         {
             type: 'input',
@@ -30,13 +32,13 @@ const managerPrompt = (managerArr) => {
             message: `What is the office number of this manager?`,
         },
     ]).then(data => {
-        managerArr.push(data);
+        const manager = new Manager(data.name, data.id, data.email, data.officeNumber);
+        employees.push(manager);
         addAnotherEmployee();
     });
 };
 
-const engineerPrompt = (engineerArr) => {
-    //Creates an array for engineers
+const engineerPrompt = () => {
 
     return inquirer.prompt([
         {
@@ -60,13 +62,13 @@ const engineerPrompt = (engineerArr) => {
             message: `What is this engineer's gitHub user name?`,
         },
     ]).then(data => {
-        engineerArr.push(data);
+        const engineer = new Engineer(data.name, data.id, data.email, data.github);
+        employees.push(engineer);
         addAnotherEmployee();
     });
 };
 
-const internPrompt = (internArr) => {
-    //Creates an array for interns
+const internPrompt = () => {
 
     return inquirer.prompt([
         {
@@ -90,7 +92,8 @@ const internPrompt = (internArr) => {
             message: `What school did this intern graduate from / is attending?`
         },
     ]). then(data => {
-        internArr.push(data);
+        const intern = new Intern(data.name, data.id, data.email, data.school);
+        employees.push(intern);
         addAnotherEmployee();
     });
 };
@@ -106,17 +109,17 @@ const addAnotherEmployee = () => {
     ]).then(data => {
         console.log(data);
         if (data.addAnotherEmployee === 'Engineer') {
-            return engineerPrompt(engineerArr);
+            return engineerPrompt();
         }
         else if (data.addAnotherEmployee === 'Intern') {
-            return internPrompt(internArr);
+            return internPrompt();
         } else {
             return;
         }
     })
 };
 
-managerPrompt(managerArr)
+managerPrompt()
 //  .then(managerArr, engineerArr, internArr => {
 //      return generatePage(managerArr, engineerArr, internArr)
 //  })

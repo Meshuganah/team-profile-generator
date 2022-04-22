@@ -65,7 +65,7 @@ const generateIntern = intern => {
     `;
 };
 
-module.exports = (employees) => {
+module.exports = employees => {
     
 const manager = [];
 const engineer = [];

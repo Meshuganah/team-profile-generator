@@ -111,8 +111,7 @@ const addAnotherEmployee = () => {
         else if (data.addAnotherEmployee === 'Intern') {
             return internPrompt(internArr);
         } else {
-            generatePage(managerArr, engineerArr, internArr);
-            writeFile(pageHTML);
+            return;
         }
     })
 };
@@ -124,6 +123,6 @@ managerPrompt(managerArr)
 //  .then(pageHTML => {
 //      return writeFile(pageHTML);
 //  })
-//  .thencatch(err => {
+//  .catch(err => {
 //      console.log(err);
 //  });

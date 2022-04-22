@@ -1,65 +1,80 @@
+
 //Generates the Manager Card
-const generateManager = managerArr => {
+const generateManager = manager => {
     return `
-    <div class="card manager-card border border-dark col-3 bg-primary mx-5">
-    <div class="card-body">
-        <h5 class="card-title text-light">${managerArr.name}</h5>
-        <h5 class="card-subtitle text-light">Manager</h5>
-        <ul class="list-group">
-            <li class="list-group-item">ID:${managerArr.id} </li>
-            <li class="list-group-item">Email:<a href="${managerArr.email}">${managerArr.email}</a></li>
-            <li class="list-group-item">Office Number:${managerArr.officeNumber}</li>
-        </ul>
+    ${manager
+    .map((manager) => {
+        return `
+        <div class="card manager-card border border-dark col-3 bg-primary mx-5">
+        <div class="card-body">
+            <h5 class="card-title text-light">${manager.getName()}</h5>
+            <h5 class="card-subtitle text-light">Manager</h5>
+            <ul class="list-group">
+                <li class="list-group-item">ID:${manager.getId()} </li>
+                <li class="list-group-item">Email:<a href="${manager.getEmail()}">${manager.getEmail()}</a></li>
+                <li class="list-group-item">Office Number:${manager.getOfficeNumber()}</li>
+            </ul>
+        </div>
     </div>
-</div>
-`;
+        `;
+    }).join('')}
+    `;
 };
 
 //Generates the Engineer Card
-const generateEngineer = engineerArr => {
+const generateEngineer = engineer => {
     return `
-        ${engineerArr
-        .map(({ name, id, email, github}) => {
+        ${engineer
+        .map((engineer) => {
             return `
             <div class="card enginner-card border border-dark col-3 bg-primary mx-5">
             <div class="card-body">
-                <h5 class="card-title text-light">${name}</h5>
+                <h5 class="card-title text-light">${engineer.getName()}</h5>
                 <h5 class="card-subtitle text-light">Engineer</h5>
                 <ul class="list-group">
-                    <li class="list-group-item">ID:${id}</li>
-                    <li class="list-group-item">Email:<a href="${email}">${email}</a></li>
-                    <li class="list-group-item">GitHub:<a href="github.com/${github}">${github}</a></li>
+                    <li class="list-group-item">ID:${engineer.getId()}</li>
+                    <li class="list-group-item">Email:<a href="${engineer.getEmail()}">${engineer.getEmail()}</a></li>
+                    <li class="list-group-item">GitHub:<a href="github.com/${engineer.getGithub()}">${engineer.getGithub()}</a></li>
                 </ul>
             </div>
         </div>
             `;
-        })}
+        }).join('')}
     `;
 };
 
 //Generates the Intern card
-const generateIntern = internArr => {
+const generateIntern = intern => {
     return `
-        ${internArr
-        .map(({ name, id, email, school}) => {
+        ${intern
+        .map((intern) => {
             return `
             <div class="card intern-card border border-dark col-3 bg-primary mx-5">
             <div class="card-body">
-                <h5 class="card-title text-light">${name}</h5>
+                <h5 class="card-title text-light">${intern.getName()}</h5>
                 <h5 class="card-subtitle text-light">Intern</h5>
                 <ul class="list-group">
-                    <li class="list-group-item">ID:${id}</li>
-                    <li class="list-group-item">Email:<a href="${email}">${email}</a></li>
-                    <li class="list-group-item">${school}</li>
+                    <li class="list-group-item">ID:${intern.getId()}</li>
+                    <li class="list-group-item">Email:<a href="${intern.getEmail()}">${intern.getEmail()}</a></li>
+                    <li class="list-group-item">${intern.getSchool()}</li>
                 </ul>
             </div>
         </div>
             `;
-        })}
+        }).join('')}
     `;
 };
 
-module.exports = (managerArr, engineerArr, internArr) => {
+module.exports = (employees) => {
+    
+const manager = [];
+const engineer = [];
+const intern = [];
+
+manager.push(employees.filter(employee => employee.getRole() === 'Manager'));
+engineer.push(employees.filter(employee => employee.getRole() === 'Engineer'));
+intern.push(employees.filter(employee => employee.getRole() === 'Intern'));
+
 
     return `
     <!DOCTYPE html>
@@ -76,9 +91,9 @@ module.exports = (managerArr, engineerArr, internArr) => {
         <h1 class="text-center text-light">Your Team Roster:</h1>
     </header>
     <div class="row">
-        ${generateManager(managerArr)}
-        ${generateEngineer(engineerArr)}
-        ${generateIntern(internArr)}
+        ${generateManager(manager)}
+        ${generateEngineer(engineer)}
+        ${generateIntern(intern)}
     </div>
 </body>
 </html>

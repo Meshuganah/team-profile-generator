@@ -6,6 +6,7 @@ const { writeFile } = require(`./src/generate-site`);
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
+const { builtinModules } = require('module');
 
 const employees = [];
 
@@ -114,14 +115,16 @@ const addAnotherEmployee = () => {
         else if (data.addAnotherEmployee === 'Intern') {
             return internPrompt();
         } else {
-            return;
+            return generatePage(employees).then(pageHTML => {return writeFile(pageHTML)});
         }
     })
 };
 
+
+
 managerPrompt()
-//  .then(managerArr, engineerArr, internArr => {
-//      return generatePage(managerArr, engineerArr, internArr)
+//  .then(employees => {
+//      return generatePage(employees)
 //  })
 //  .then(pageHTML => {
 //      return writeFile(pageHTML);

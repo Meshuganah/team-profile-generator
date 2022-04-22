@@ -1,5 +1,6 @@
 
 const { expect, test } = require('@jest/globals');
+const exp = require('constants');
 const Manager = require('../lib/Manager');
 
 test(`creates an manager object`, () => {
@@ -16,4 +17,10 @@ test(`returns manager's role`, () => {
     const manager = new Manager('Mark', 1, 'fake@fakemail.com', 1);
 
     expect(manager.getRole()).toBe('Manager');
+});
+
+test(`returns manager's officeNumber`, () => {
+    const manager = new Manager('Mark', 1, 'fake@fakemail.com', 1);
+
+    expect(manager.getOfficeNumber()).toBe(1);
 })

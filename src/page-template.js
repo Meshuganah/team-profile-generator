@@ -1,82 +1,57 @@
+let employeeCards = '';
 
-//Generates the Manager Card
-const generateManager = manager => {
-    return `
-    ${manager
-    .map((manager) => {
-        return `
-        <div class="card manager-card border border-dark col-3 bg-primary mx-5">
-        <div class="card-body">
-            <h5 class="card-title text-light">${manager.getName()}</h5>
-            <h5 class="card-subtitle text-light">Manager</h5>
-            <ul class="list-group">
-                <li class="list-group-item">ID:${manager.getId()} </li>
-                <li class="list-group-item">Email:<a href="${manager.getEmail()}">${manager.getEmail()}</a></li>
-                <li class="list-group-item">Office Number:${manager.getOfficeNumber()}</li>
-            </ul>
-        </div>
-    </div>
-        `;
-    }).join('')}
-    `;
-};
-
-//Generates the Engineer Card
-const generateEngineer = engineer => {
-    return `
-        ${engineer
-        .map((engineer) => {
-            return `
+const generate = (employees) => {
+    employees.forEach(employee => {
+        if (employee.getRole() === "Manager") {
+            console.log("-------",  `
+            <div class="card manager-card border border-dark col-3 bg-primary mx-5">
+            <div class="card-body">
+                <h5 class="card-title text-light">${employee.getName()}</h5>
+                <h5 class="card-subtitle text-light">Manager</h5>
+                <ul class="list-group">
+                    <li class="list-group-item">ID:${employee.getId()} </li>
+                    <li class="list-group-item">Email:<a href="${employee.getEmail()}">${employee.getEmail()}</a></li>
+                    <li class="list-group-item">Office Number:${employee.getOfficeNumber()}</li>
+                </ul>
+            </div>
+            </div>
+            `);
+        }
+        else if (employee.getRole() === "Engineer") {
+            employeeCards += `
             <div class="card enginner-card border border-dark col-3 bg-primary mx-5">
             <div class="card-body">
-                <h5 class="card-title text-light">${engineer.getName()}</h5>
+                <h5 class="card-title text-light">${employee.getName()}</h5>
                 <h5 class="card-subtitle text-light">Engineer</h5>
                 <ul class="list-group">
-                    <li class="list-group-item">ID:${engineer.getId()}</li>
-                    <li class="list-group-item">Email:<a href="${engineer.getEmail()}">${engineer.getEmail()}</a></li>
-                    <li class="list-group-item">GitHub:<a href="github.com/${engineer.getGithub()}">${engineer.getGithub()}</a></li>
-                </ul>
+                    <li class="list-group-item">ID:${employee.getId()}</li>
+                    <li class="list-group-item">Email:<a href="${employee.getEmail()}">${employee.getEmail()}</a></li>
+                    <li class="list-group-item">GitHub:<a href="github.com/${employee.getGithub()}">${employee.getGithub()}</a></li>
+                    </ul>
+                </div>
             </div>
-        </div>
             `;
-        }).join('')}
-    `;
-};
-
-//Generates the Intern card
-const generateIntern = intern => {
-    return `
-        ${intern
-        .map((intern) => {
-            return `
+        }
+        else if (employee.getRole() === "Intern") {
+            employeeCards += `
             <div class="card intern-card border border-dark col-3 bg-primary mx-5">
             <div class="card-body">
-                <h5 class="card-title text-light">${intern.getName()}</h5>
+                <h5 class="card-title text-light">${employee.getName()}</h5>
                 <h5 class="card-subtitle text-light">Intern</h5>
                 <ul class="list-group">
-                    <li class="list-group-item">ID:${intern.getId()}</li>
-                    <li class="list-group-item">Email:<a href="${intern.getEmail()}">${intern.getEmail()}</a></li>
-                    <li class="list-group-item">${intern.getSchool()}</li>
-                </ul>
+                        <li class="list-group-item">ID:${employee.getId()}</li>
+                        <li class="list-group-item">Email:<a href="${employee.getEmail()}">${employee.getEmail()}</a></li>
+                        <li class="list-group-item">${employee.getSchool()}</li>
+                    </ul>
+                </div>
             </div>
-        </div>
-            `;
-        }).join('')}
-    `;
+             `;
+        };
+    });
 };
 
-module.exports = employees => {
-    
-const manager = [];
-const engineer = [];
-const intern = [];
-
-manager.push(employees.filter(employee => employee.getRole() === 'Manager'));
-engineer.push(employees.filter(employee => employee.getRole() === 'Engineer'));
-intern.push(employees.filter(employee => employee.getRole() === 'Intern'));
-
-
-    return `
+module.exports = employees => {   
+    const fileContent = `
     <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -91,11 +66,11 @@ intern.push(employees.filter(employee => employee.getRole() === 'Intern'));
         <h1 class="text-center text-light">Your Team Roster:</h1>
     </header>
     <div class="row">
-        ${generateManager(manager)}
-        ${generateEngineer(engineer)}
-        ${generateIntern(intern)}
+        ${generate(employees)}
     </div>
 </body>
 </html>
     `;
+    console.log(fileContent);
+    return fileContent;
 };

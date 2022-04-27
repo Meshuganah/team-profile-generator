@@ -6,7 +6,6 @@ const { writeFile } = require(`./src/generate-site`);
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
-const { builtinModules } = require('module');
 
 const employees = [];
 
@@ -108,14 +107,14 @@ const addAnotherEmployee = () => {
             choices: ['Engineer', 'Intern', 'None'],
         },
     ]).then(data => {
-        console.log(data);
         if (data.addAnotherEmployee === 'Engineer') {
             return engineerPrompt();
         }
         else if (data.addAnotherEmployee === 'Intern') {
             return internPrompt();
         } else {
-            return generatePage(employees).then(pageHTML => {return writeFile(pageHTML)});
+             const pageHTML = generatePage(employees);
+             writeFile(pageHTML);
         }
     })
 };

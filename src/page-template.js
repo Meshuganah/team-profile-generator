@@ -3,7 +3,7 @@ let employeeCards = '';
 const generate = (employees) => {
     employees.forEach(employee => {
         if (employee.getRole() === "Manager") {
-            console.log("-------",  `
+            employeeCards += `
             <div class="card manager-card border border-dark col-3 bg-primary mx-5">
             <div class="card-body">
                 <h5 class="card-title text-light">${employee.getName()}</h5>
@@ -15,7 +15,7 @@ const generate = (employees) => {
                 </ul>
             </div>
             </div>
-            `);
+            `;
         }
         else if (employee.getRole() === "Engineer") {
             employeeCards += `
@@ -47,10 +47,12 @@ const generate = (employees) => {
             </div>
              `;
         };
-    });
+    })
+    return employeeCards;
 };
 
 module.exports = employees => {   
+    generate(employees)
     const fileContent = `
     <!DOCTYPE html>
 <html lang="en">
@@ -66,7 +68,7 @@ module.exports = employees => {
         <h1 class="text-center text-light">Your Team Roster:</h1>
     </header>
     <div class="row">
-        ${generate(employees)}
+        ${employeeCards}
     </div>
 </body>
 </html>

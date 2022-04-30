@@ -122,12 +122,4 @@ const addAnotherEmployee = () => {
 
 
 managerPrompt()
-//  .then(employees => {
-//      return generatePage(employees)
-//  })
-//  .then(pageHTML => {
-//      return writeFile(pageHTML);
-//  })
-//  .catch(err => {
-//      console.log(err);
-//  });
+

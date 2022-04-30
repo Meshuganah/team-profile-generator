@@ -73,6 +73,6 @@ module.exports = employees => {
 </body>
 </html>
     `;
-    console.log(fileContent);
+    //console.log(fileContent);
     return fileContent;
 };

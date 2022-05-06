@@ -20,3 +20,7 @@ After each member they will be asked if they need to add another engineer or int
 Currently only one manager may be added per profile, however as many engineers and interns may be added as neccessary.
 When users are done adding team members, they simply select "none" when prompted to add more members.
 Afterwards the team profile is generated, and sent to the dist folder.
+
+[](assets%5CteamProfileGeneratorPreview.webm)
+
+[](assets%5CteamProfileGeneratorTestPass.webm)

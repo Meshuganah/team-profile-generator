@@ -21,6 +21,6 @@ Currently only one manager may be added per profile, however as many engineers a
 When users are done adding team members, they simply select "none" when prompted to add more members.
 Afterwards the team profile is generated, and sent to the dist folder.
 
-[](assets%5CteamProfileGeneratorPreview.webm)
+[](assets%5CteamProfileGeneratorPreview.mp4)
 
-[](assets%5CteamProfileGeneratorTestPass.webm)
+[](assets%5CteamProfileGeneratorTestPass.mp4)

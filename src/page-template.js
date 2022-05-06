@@ -10,7 +10,7 @@ const generate = (employees) => {
                 <h5 class="card-subtitle text-light">Manager</h5>
                 <ul class="list-group">
                     <li class="list-group-item">ID:${employee.getId()} </li>
-                    <li class="list-group-item">Email:<a href="${employee.getEmail()}">${employee.getEmail()}</a></li>
+                    <li class="list-group-item">Email:<a href="mailto:${employee.getEmail()}">${employee.getEmail()}</a></li>
                     <li class="list-group-item">Office Number:${employee.getOfficeNumber()}</li>
                 </ul>
             </div>
@@ -25,7 +25,7 @@ const generate = (employees) => {
                 <h5 class="card-subtitle text-light">Engineer</h5>
                 <ul class="list-group">
                     <li class="list-group-item">ID:${employee.getId()}</li>
-                    <li class="list-group-item">Email:<a href="${employee.getEmail()}">${employee.getEmail()}</a></li>
+                    <li class="list-group-item">Email:<a href="mailto:${employee.getEmail()}">${employee.getEmail()}</a></li>
                     <li class="list-group-item">GitHub:<a href="github.com/${employee.getGithub()}">${employee.getGithub()}</a></li>
                     </ul>
                 </div>
@@ -40,7 +40,7 @@ const generate = (employees) => {
                 <h5 class="card-subtitle text-light">Intern</h5>
                 <ul class="list-group">
                         <li class="list-group-item">ID:${employee.getId()}</li>
-                        <li class="list-group-item">Email:<a href="${employee.getEmail()}">${employee.getEmail()}</a></li>
+                        <li class="list-group-item">Email:<a href="mailto:${employee.getEmail()}">${employee.getEmail()}</a></li>
                         <li class="list-group-item">${employee.getSchool()}</li>
                     </ul>
                 </div>
